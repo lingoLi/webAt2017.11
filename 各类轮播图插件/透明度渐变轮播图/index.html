@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*div {*/
+        /*width: 992px;*/
+        /*height: 420px;*/
+        /*margin: 100px auto;*/
+        /*}*/
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #wrap {
+            position: relative;
+            width: 992px;
+            height: 420px;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+
+        #wrap img {
+            position: absolute;
+        }
+
+        #btn {
+            position: absolute;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+        }
+
+        #btn span {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #ffd;
+            margin-left: 11px;
+            cursor: pointer;
+
+        }
+
+        #btn .yuan {
+            background: #000;
+        }
+
+        .left {
+            position: absolute;
+            top: 191px;
+            width: 41px;
+            height: 69px;
+            background: url(images/arr.png) -82px 0;
+        }
+
+        .right {
+            position: absolute;
+            top: 191px;
+            right: 0px;
+            width: 41px;
+            height: 69px;
+            background: url(images/arr.png) -123px 0;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <img src="images/1.jpg" style="opacity:1; filter:alpha(opacity:100);"/>
+    <img src="images/2.jpg" style="opacity:0; filter:alpha(opacity:0);"/>
+    <img src="images/3.jpg" style="opacity:0; filter:alpha(opacity:0);"/>
+    <img src="images/4.jpg" style="opacity:0; filter:alpha(opacity:0);"/>
+    <img src="images/5.jpg" style="opacity:0; filter:alpha(opacity:0);"/>
+    <div id="btn">
+        <span class="yuan"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <ul>
+        <li class="left" id="left"></li>
+        <li class="right" id="right"></li>
+    </ul>
+</div>
+<script>
+    //轮播图
+    window.onload = function () {
+
+        var oDiv = document.getElementById("wrap");
+        var oImg = oDiv.getElementsByTagName("img");
+
+        var oBtn = document.getElementById("btn");
+        var oSpan = oBtn.getElementsByTagName('span');
+
+        var left = document.getElementById("left");
+        var right = document.getElementById("right");
+        var iNum = 0;	// 建立索引值
+        function fadeOut(obj) {
+            var value = 100;	// 设置初始透明度
+            clearInterval(obj.timer);
+
+            obj.timer = setInterval(function () {
+                var speed = -5;
+                if (value == 0) {
+                    clearInterval(obj.timer);
+                } else {
+                    value += speed;
+                    obj.style.opacity = value / 100;
+                    obj.style.filter = "alpha(opacity:" + value + ")";
+                }
+            }, 30);
+        }
+
+        function fadeIn(obj) {
+            var value = 0;	// 设置初始透明度
+            clearInterval(obj.timer);	// 清除该对象对应的定时器
+
+            obj.timer = setInterval(function () {
+                var speed = 3;	// 设置速度
+                if (value == 100) {
+                    clearInterval(obj.timer);
+                } else {
+                    value += speed;
+                    obj.style.opacity = value / 100;
+                    obj.style.filter = "alpha(opacity:" + value + ")";
+                }
+            }, 30);
+        }
+
+        var buttons = function () {		// 设置按钮
+            for (var i = 0; i < oSpan.length; i++) {
+                if (oSpan[i].className == 'yuan') {
+                    oSpan[i].className = '';
+                    break;
+                }
+            }
+            oSpan[iNum].className = 'yuan';
+        }
+
+        function auto() {
+            fadeOut(oImg[iNum]);	// 淡出 当前 img
+            if (iNum == oImg.length - 1) {
+                iNum = 0;
+            } else {
+                iNum++;
+            }
+            fadeIn(oImg[iNum]);		// 淡入 当前+1 img
+            buttons();
+        }
+
+        //鼠标经过左箭头
+        left.onmouseover = function () {
+            left.style.background = "url(images/arr.png) 0px 0";
+        }
+
+        left.onmouseout = function () {
+            left.style.background = ""
+        }
+        left.onclick = function () {
+            fadeOut(oImg[iNum]);
+            fadeIn(oImg[iNum]);
+            auto();
+
+        };
+        //鼠标经过右箭头
+        right.onmouseover = function () {
+            right.style.background = "url(images/arr.png) -41px 0";
+        }
+        right.onmouseout = function () {
+            right.style.background = ""
+        }
+        //点击右
+        right.onclick = function () {
+            fadeOut(oImg[iNum]);
+            fadeIn(oImg[iNum]);
+            auto();
+
+        };
+
+        // click 事件
+        for (var i = 0; i < oSpan.length; i++) {
+            oSpan[i].index = i;
+            oSpan[i].onclick = function () {
+                if (this.className == 'yuan') {
+                    return;
+                }
+                fadeOut(oImg[iNum]);
+                fadeIn(oImg[this.index]);
+                iNum = this.index;
+                buttons();
+            }
+        }
+
+
+
+
+        oDiv.onmouseover = function () {
+            clearInterval(timer);
+        }
+        oDiv.onmouseout = function () {
+            timer = setInterval(auto, 2000);
+        }
+
+        var timer = setInterval(auto, 2000);
+
+    }
+
+
+
+
+</script>
+</body>
+</html>
