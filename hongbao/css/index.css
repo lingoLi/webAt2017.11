@@ -1,0 +1,174 @@
+body {
+    width: 100%;
+    height: 100%;
+}
+.hide {
+
+    /* opacity: 0; */
+    opacity: 0;
+}
+
+.draw-gift {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.draw-img {
+    width: 100%;
+    margin-top: 6.5rem;
+    position: relative;
+}
+
+.draw-down {
+    position: absolute;
+    width: 9rem;
+    height: 9.9rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%; 
+    background-image: url(../image/open-no.png);
+    left: 50%;
+    margin-left: -4.5rem;
+    z-index: 11;
+}
+
+@-webkit-keyframes draw-down {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.draw-down2 {
+    position: absolute;
+    width: 9rem;
+    height: 9.9rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url(../image/open-before.png);
+    left: 50%;
+    margin-left: -4.5rem;
+    z-index: 10;
+}
+
+@-webkit-keyframes draw-down2 {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.draw-mid {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url(../image/open.png);
+    left: 50%;
+    margin-left: -1.5rem;
+    z-index: 100;
+    top: 1.9rem;
+}
+    .draw-mid-move {
+        -webkit-animation: open 0.2s linear 0.5s infinite alternate;
+        -webkit-animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+        animation: open 0.2s linear 0.5s infinite alernate;
+        animation-timing-function: cubic-bezier(0.35, 1, 0.25, 1);
+}
+@keyframes open {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0.9);
+    }
+}
+
+@-webkit-keyframes open {
+    0% {
+        -webkit-transform: scale(1);
+    }
+    100% {
+        -webkit-transform: scale(0.9);
+    }
+}
+
+.draw-up {
+    position: absolute;
+    width: 9rem;
+    height: 4.15rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url(../image/first.png);
+    left: 50%;  
+    margin-left: -4.5rem;
+    top: 0;
+    z-index: 8;
+    opacity: 0;
+}
+
+ .draw-up-up {
+    position: absolute;
+    width: 9rem;
+    height: 4.12rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url(../image/second.png);
+    left: 50%;
+    margin-left: -4.5rem;
+    top: 0;
+    opacity: 0;
+    z-index: 3;
+}
+
+.draw-list {
+    position: absolute;
+    width: 5rem;
+    height: 6rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /* background-image: url(image/draw-list-bg.jpg); */
+    left: 50%;
+    margin-left: -2.5rem;
+    top: 3.5rem;
+    opacity: 0;
+    z-index: 8;
+    color: yellow;
+    line-height: 6rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.draw-list img {
+    vertical-align: middle;
+    position: absolute;
+    width: 70%;
+    top: 1.6rem;
+    left: 15%;
+}
+
+#draw-btn {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 0.65rem;
+    color: #333;
+    top: 17rem;
+}
